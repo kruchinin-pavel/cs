@@ -65,6 +65,10 @@ public class Interpreter {
             fillBorder(canvasRef, refCh, ch, x - 1, y);
             fillBorder(canvasRef, refCh, ch, x, y + 1);
             fillBorder(canvasRef, refCh, ch, x, y - 1);
+            fillBorder(canvasRef, refCh, ch, x + 1, y + 1);
+            fillBorder(canvasRef, refCh, ch, x + 1, y - 1);
+            fillBorder(canvasRef, refCh, ch, x - 1, y + 1);
+            fillBorder(canvasRef, refCh, ch, x - 1, y - 1);
         }
     }
 
