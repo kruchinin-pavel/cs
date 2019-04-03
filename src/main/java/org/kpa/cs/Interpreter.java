@@ -58,7 +58,7 @@ public class Interpreter {
 
     private void fillBorder(AtomicReference<Canvas> canvasRef, char refCh, char ch, int x, int y) {
         checkCanvas(canvasRef);
-        if (!canvasRef.get().inBound(x, y)) return;
+        if (!canvasRef.get().isInBound(x, y)) return;
         if (refCh == canvasRef.get().get(x, y).ch) {
             canvasRef.get().put(x, y, ch);
             fillBorder(canvasRef, refCh, ch, x + 1, y);

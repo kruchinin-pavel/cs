@@ -28,11 +28,11 @@ public class Canvas {
     }
 
     private void validate(int x, int y) {
-        Preconditions.checkArgument(inBound(x, y), "Not in bounds: x[1:%s]=%s, y[1:%s]=%s",
+        Preconditions.checkArgument(isInBound(x, y), "Not in bounds: x[1:%s]=%s, y[1:%s]=%s",
                 width, x, height, y);
     }
 
-    public boolean inBound(int x, int y) {
+    public boolean isInBound(int x, int y) {
         return 0 < x && x <= width && 0 < y && y <= height;
     }
 
