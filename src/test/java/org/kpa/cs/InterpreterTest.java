@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(Parameterized.class)
-public class CanvasTest {
+public class InterpreterTest {
     private final List<String> commands;
     private final List<Pixel> expectedPixels;
 
-    public CanvasTest(List<String> commands, List<Pixel> expectedPixels) {
+    public InterpreterTest(List<String> commands, List<Pixel> expectedPixels) {
         this.commands = commands;
         this.expectedPixels = expectedPixels;
     }

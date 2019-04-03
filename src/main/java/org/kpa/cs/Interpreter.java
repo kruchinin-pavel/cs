@@ -24,25 +24,25 @@ public class Interpreter {
 
     private void createCanvas(String[] args) {
         secureRun(() -> {
-            int[] iArgs = toInt(args);
-            canvasRef.set(new Canvas(iArgs[0], iArgs[1]));
+            int[] p = toInt(args);
+            canvasRef.set(new Canvas(p[0], p[1]));
         }, 2, "create canvas", "x1 y1", args);
     }
 
     private void drawLine(String[] args) {
         secureRun(() -> {
             int[] p = toInt(args);
-            drawLine(canvasRef, p[0], p[1], p[2], p[3]);
+            drawLine(p[0], p[1], p[2], p[3]);
         }, 4, "draw line", "x1 y1 x2 y2", args);
     }
 
     private void drawRectangle(String[] args) {
         secureRun(() -> {
             int[] p = toInt(args);
-            drawLine(canvasRef, p[0], p[3], p[2], p[3]);
-            drawLine(canvasRef, p[0], p[1], p[2], p[1]);
-            drawLine(canvasRef, p[0], p[1], p[0], p[3]);
-            drawLine(canvasRef, p[2], p[1], p[2], p[3]);
+            drawLine(p[0], p[3], p[2], p[3]);
+            drawLine(p[0], p[1], p[2], p[1]);
+            drawLine(p[0], p[1], p[0], p[3]);
+            drawLine(p[2], p[1], p[2], p[3]);
         }, 4, "draw rectangle", "x1 y1 x2 y2", args);
     }
 
@@ -52,26 +52,26 @@ public class Interpreter {
             int x = Integer.parseInt(args[0]);
             int y = Integer.parseInt(args[1]);
             char ch = args[2].charAt(0);
-            fillBorder(canvasRef, canvasRef.get().get(x, y).ch, ch, x, y);
+            fillBorder(canvasRef.get().get(x, y).ch, ch, x, y);
         }, 3, "fill border", "x1 y1 char", args);
     }
 
-    private void fillBorder(AtomicReference<Canvas> canvasRef, char refCh, char ch, int x, int y) {
-        checkCanvas(canvasRef);
+    private void fillBorder(char refCh, char ch, int x, int y) {
+        validateCanvas();
         if (!canvasRef.get().isInBound(x, y)) return;
         if (refCh == canvasRef.get().get(x, y).ch) {
             canvasRef.get().put(x, y, ch);
-            fillBorder(canvasRef, refCh, ch, x + 1, y);
-            fillBorder(canvasRef, refCh, ch, x - 1, y);
-            fillBorder(canvasRef, refCh, ch, x, y + 1);
-            fillBorder(canvasRef, refCh, ch, x, y - 1);
+            fillBorder(refCh, ch, x + 1, y);
+            fillBorder(refCh, ch, x - 1, y);
+            fillBorder(refCh, ch, x, y + 1);
+            fillBorder(refCh, ch, x, y - 1);
         }
     }
 
-    private void drawLine(AtomicReference<Canvas> canvasRef, int x1, int y1, int x2, int y2) {
-        checkCanvas(canvasRef);
+    private void drawLine(int x1, int y1, int x2, int y2) {
+        validateCanvas();
         if (x2 < x1) {
-            drawLine(canvasRef, x2, y2, x1, y1);
+            drawLine(x2, y2, x1, y1);
         } else {
             double tan = x2 - x1 == 0 ? Double.NaN : ((double) y2 - y1) / (x2 - x1);
             int lastYTo = -1;
@@ -91,7 +91,7 @@ public class Interpreter {
         }
     }
 
-    private void checkCanvas(AtomicReference<Canvas> canvasRef) {
+    private void validateCanvas() {
         Preconditions.checkArgument(canvasRef.get() != null, "Create canvas first");
     }
 

@@ -3,13 +3,19 @@
 # Dependencies:
 
 * Internet,
-* Java >=1.8
+* Java Developer Kit (OpenJDK) >=1.8
 
-# Build & Run
+# Build
 
-Build & run from console in project root directory(change slash to backslash for Windows):
+Build in console from  project root directory (change slash to backslash for Windows):
 ```
 ./gradlew clean test distZip
 unzip  ./build/distributions/* -d ./build
+```
+
+# Run
+
+Run in console from  project root directory (change slash to backslash for Windows):
+```
 java -jar build/cs-1.0-SNAPSHOT/cs-1.0-SNAPSHOT.jar
 ```
