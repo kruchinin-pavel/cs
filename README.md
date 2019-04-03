@@ -3,7 +3,8 @@
 # Dependencies:
 
 * Internet,
-* Java Developer Kit (OpenJDK) >=1.8
+* Open/Oracle/whatever... Java Developer Kit >=1.8 (required for building & running)
+* Open/Oracle/whatever... Java Runtime Environment >=1.8 (enough for running)
 
 # Build
 
