@@ -13,6 +13,8 @@ public class Canvas {
     private final String horizontalBorder;
 
     public Canvas(int width, int height) {
+        Preconditions.checkArgument(width > 0 && height > 0,
+                "Invalid width(%s) or height(%s)", width, height);
         horizontalBorder = buf(width + 2, '-').toString();
         rows = new Pixel[width][height];
         this.width = width;
