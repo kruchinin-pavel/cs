@@ -4,8 +4,6 @@ import com.google.common.base.Preconditions;
 
 import java.io.PrintStream;
 
-import static org.kpa.cs.Helper.buf;
-
 public class Canvas {
     private final Pixel[][] rows;
     public final int width;
@@ -15,7 +13,7 @@ public class Canvas {
     public Canvas(int width, int height) {
         Preconditions.checkArgument(width > 0 && height > 0,
                 "Invalid width(%s) or height(%s)", width, height);
-        horizontalBorder = buf(width + 2, '-').toString();
+        horizontalBorder = new String(new char[width + 2]).replace("\0", "-");
         rows = new Pixel[width][height];
         this.width = width;
         this.height = height;

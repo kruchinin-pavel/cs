@@ -18,14 +18,6 @@ public class Helper {
         return Arrays.stream(strs).mapToInt(Integer::parseInt).toArray();
     }
 
-    static StringBuffer buf(int width, char ch) {
-        char[] charArray = new char[width];
-        Arrays.fill(charArray, ch);
-        StringBuffer e = new StringBuffer();
-        e.append(charArray);
-        return e;
-    }
-
     static void secureRun(Runnable task, int argsCount, String cmdName, String argsMask, String... args) {
         try {
             Preconditions.checkArgument(args.length == argsCount, "Illegal args count");
