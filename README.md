@@ -1,10 +1,10 @@
 # cs test exam by pavel kruchinin (pavel@kruchinin.info).
 
-#dependencies:
+# dependencies:
 
 Internet, Java >=1.8
 
-#build & run
+# Build & Run
 
 Build & run from console in project root directory(change slash to backslash for Windows):
 ```
