@@ -26,13 +26,13 @@ public class Helper {
         return e;
     }
 
-    static void secureRun(Runnable task, int argsCount, String argsMask, String... args) {
+    static void secureRun(Runnable task, int argsCount, String cmdName, String argsMask, String... args) {
         try {
             Preconditions.checkArgument(args.length == argsCount, "Illegal args count");
             task.run();
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format("Error: %s. Given parameters must be: %s. Currently: %s",
-                    e.getMessage(), argsMask, Arrays.toString(args)), e);
+            throw new IllegalArgumentException(String.format("Error: %s. Given parameters to %s must be: %s. Currently: %s",
+                    e.getMessage(), cmdName, argsMask, Arrays.toString(args)), e);
         }
     }
 }

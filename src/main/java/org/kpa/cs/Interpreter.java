@@ -26,14 +26,14 @@ public class Interpreter {
         secureRun(() -> {
             int[] iArgs = toInt(args);
             canvasRef.set(new Canvas(iArgs[0], iArgs[1]));
-        }, 2, "x1 y1", args);
+        }, 2, "create canvas", "x1 y1", args);
     }
 
     private void drawLine(String[] args) {
         secureRun(() -> {
             int[] p = toInt(args);
             drawLine(canvasRef, p[0], p[1], p[2], p[3]);
-        }, 4, "x1 y1 x2 y2", args);
+        }, 4, "draw line", "x1 y1 x2 y2", args);
     }
 
     private void drawRectangle(String[] args) {
@@ -43,7 +43,7 @@ public class Interpreter {
             drawLine(canvasRef, p[0], p[1], p[2], p[1]);
             drawLine(canvasRef, p[0], p[1], p[0], p[3]);
             drawLine(canvasRef, p[2], p[1], p[2], p[3]);
-        }, 4, "x1 y1 x2 y2", args);
+        }, 4, "draw rectangle", "x1 y1 x2 y2", args);
     }
 
     private void fillBorder(String[] args) {
@@ -53,7 +53,7 @@ public class Interpreter {
             int y = Integer.parseInt(args[1]);
             char ch = args[2].charAt(0);
             fillBorder(canvasRef, canvasRef.get().get(x, y).ch, ch, x, y);
-        }, 3, "x1 y1 char", args);
+        }, 3, "fill border", "x1 y1 char", args);
     }
 
     private void fillBorder(AtomicReference<Canvas> canvasRef, char refCh, char ch, int x, int y) {
@@ -105,7 +105,8 @@ public class Interpreter {
         String command = iter.next();
         if ("Q".equalsIgnoreCase(command)) return true;
         Consumer<String[]> commandWorker = commandMap.get(command.toUpperCase());
-        Preconditions.checkArgument(commandWorker != null, "Not found command %s", command);
+        Preconditions.checkArgument(commandWorker != null,
+                "Not found command: %s. Commands are: %s. Q - exit.", command, commandMap.keySet());
         commandWorker.accept(Helper.toStr(iter));
         return false;
     }
