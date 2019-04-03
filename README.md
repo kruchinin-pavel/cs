@@ -1,8 +1,9 @@
 # cs test exam by pavel kruchinin (pavel@kruchinin.info).
 
-# dependencies:
+# Dependencies:
 
-Internet, Java >=1.8
+* Internet,
+* Java >=1.8
 
 # Build & Run
 
