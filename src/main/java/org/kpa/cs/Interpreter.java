@@ -5,10 +5,10 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static org.kpa.cs.Helper.secureRun;
 import static org.kpa.cs.Helper.toInt;
@@ -53,19 +53,25 @@ public class Interpreter {
             int x = Integer.parseInt(args[0]);
             int y = Integer.parseInt(args[1]);
             char ch = args[2].charAt(0);
-            fillBorder(canvasRef.get().get(x, y).ch, ch, x, y);
+            List<Runnable> backlog = new ArrayList<>();
+            fillBorder(canvasRef.get().get(x, y).ch, ch, x, y, backlog);
+            while (backlog.size() > 0) {
+                List<Runnable> currentTasks = new ArrayList<>(backlog);
+                backlog.clear();
+                currentTasks.forEach(Runnable::run);
+            }
         }, 3, "fill border", "x1 y1 char", args);
     }
 
-    private void fillBorder(char refCh, char ch, int x, int y) {
+    private void fillBorder(char refCh, char ch, int x, int y, List<Runnable> tasks) {
         validateCanvas();
         if (!canvasRef.get().isInBound(x, y)) return;
         if (refCh == canvasRef.get().get(x, y).ch) {
             canvasRef.get().put(x, y, ch);
-            fillBorder(refCh, ch, x + 1, y);
-            fillBorder(refCh, ch, x - 1, y);
-            fillBorder(refCh, ch, x, y + 1);
-            fillBorder(refCh, ch, x, y - 1);
+            tasks.add(() -> fillBorder(refCh, ch, x + 1, y, tasks));
+            tasks.add(() -> fillBorder(refCh, ch, x - 1, y, tasks));
+            tasks.add(() -> fillBorder(refCh, ch, x, y + 1, tasks));
+            tasks.add(() -> fillBorder(refCh, ch, x, y - 1, tasks));
         }
     }
 
