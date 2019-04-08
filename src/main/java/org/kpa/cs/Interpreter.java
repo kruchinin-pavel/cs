@@ -2,6 +2,7 @@ package org.kpa.cs;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.Iterator;
@@ -100,7 +101,7 @@ public class Interpreter {
      * @return true - quit command receipt, false - continue processing
      */
     public boolean intepret(String inputStr) {
-        if (inputStr == null) return true;
+        if (Strings.isNullOrEmpty(inputStr)) return true;
         Iterator<String> iter = Splitter.on(" ").trimResults().omitEmptyStrings().split(inputStr).iterator();
         String command = iter.next();
         if ("Q".equalsIgnoreCase(command)) return true;

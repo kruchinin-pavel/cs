@@ -22,6 +22,7 @@ public class Starter {
                     System.err.println(e.getMessage());
                 }
             }
+            System.out.println("Bye!");
         } catch (Exception e) {
             log.error("Unprocessed error happened(exit(1)): {}", e.getMessage(), e);
             System.exit(1);
