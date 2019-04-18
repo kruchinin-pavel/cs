@@ -1,6 +1,8 @@
 package org.kpa.cs;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -18,8 +20,9 @@ public class Helper {
         return Arrays.stream(strs).mapToInt(Integer::parseInt).toArray();
     }
 
-    static void secureRun(Runnable task, int argsCount, String cmdName, String argsMask, String... args) {
+    static void secureRun(Runnable task, String cmdName, String argsMask, String... args) {
         try {
+            int argsCount = Splitter.on(CharMatcher.whitespace()).trimResults().splitToList(argsMask).size();
             Preconditions.checkArgument(args.length == argsCount, "Illegal args count");
             task.run();
         } catch (IllegalArgumentException e) {

@@ -27,14 +27,14 @@ public class Interpreter {
         secureRun(() -> {
             int[] p = toInt(args);
             canvasRef.set(new Canvas(p[0], p[1]));
-        }, 2, "create canvas", "x1 y1", args);
+        }, "create canvas", "x1 y1", args);
     }
 
     private void drawLine(String[] args) {
         secureRun(() -> {
             int[] p = toInt(args);
             drawLine(p[0], p[1], p[2], p[3]);
-        }, 4, "draw line", "x1 y1 x2 y2", args);
+        }, "draw line", "x1 y1 x2 y2", args);
     }
 
     private void drawRectangle(String[] args) {
@@ -44,7 +44,7 @@ public class Interpreter {
             drawLine(p[0], p[1], p[2], p[1]);
             drawLine(p[0], p[1], p[0], p[3]);
             drawLine(p[2], p[1], p[2], p[3]);
-        }, 4, "draw rectangle", "x1 y1 x2 y2", args);
+        }, "draw rectangle", "x1 y1 x2 y2", args);
     }
 
     private void fillBorder(String[] args) {
@@ -60,7 +60,7 @@ public class Interpreter {
                 backlog.clear();
                 currentTasks.forEach(Runnable::run);
             }
-        }, 3, "fill border", "x1 y1 char", args);
+        }, "fill border", "x1 y1 char", args);
     }
 
     private void fillBorder(char refCh, char ch, int x, int y, List<Runnable> tasks) {
